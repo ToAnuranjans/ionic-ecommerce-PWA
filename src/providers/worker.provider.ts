@@ -29,16 +29,18 @@ export class WorkerProvider {
     console.log('Hello ServiceWorker Provider');
   }
 
-  initServiceWorker() {
+   initServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then((subscription: any) => {
-          console.log('service worker registered');
-          setTimeout(() => {
-            this.sub = subscription;
-          }, 3000);
-        })
-        .catch(err => console.log('Error', err));
+      if (typeof navigator.serviceWorker !== undefined) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then((subscription: any) => {
+            console.log('service worker registered');
+            setTimeout(() => {
+              this.sub = subscription;
+            }, 3000);
+          })
+          .catch(err => console.log('Error', err));
+      }
     }
   }
 
